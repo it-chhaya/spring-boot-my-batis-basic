@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public interface ArticleRepository {
     // Using provider
     @SelectProvider(value = ArticleProvider.class, method = "select")
     List<ArticleDto> select();
+
+    @SelectProvider(value = ArticleProvider.class, method = "selectByArticleId")
+    ArticleDto selectByArticleId(String articleId);
 
 
 }

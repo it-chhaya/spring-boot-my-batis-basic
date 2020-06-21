@@ -11,19 +11,11 @@ public class ArticleProvider {
         }}.toString();
     }
 
-    public String selectByFilter(String articleId, String title) {
-        return new SQL(){{
+    public String selectByArticleId(String articleId) {
+        return new SQL() {{
             SELECT("*");
             FROM("articles");
-
-            // Check condition
-            if (articleId != null || !articleId.equals(""))
-                WHERE("articleId = #{articleId}");
-            else if (title != null || !title.equals(""))
-                WHERE("title = #{title}");
-            else
-                WHERE();
-
+            WHERE("article_id = #{articleId}");
         }}.toString();
     }
 
