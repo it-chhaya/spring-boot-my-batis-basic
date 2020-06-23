@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 public class BaseApiResponse<T> {
 
+    private boolean success;
     private String message;
     private T data;
     private HttpStatus status;
@@ -13,11 +14,20 @@ public class BaseApiResponse<T> {
 
     public BaseApiResponse() {}
 
-    public BaseApiResponse(String message, T data, HttpStatus status, Timestamp time) {
+    public BaseApiResponse(boolean success, String message, T data, HttpStatus status, Timestamp time) {
+        this.success = success;
         this.message = message;
         this.data = data;
         this.status = status;
         this.time = time;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 
     public String getMessage() {
