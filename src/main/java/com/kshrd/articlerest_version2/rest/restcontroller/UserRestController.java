@@ -11,17 +11,25 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @RestController
 public class UserRestController {
 
     private UserServiceImpl userService;
     private CommonUtils commonUtils;
+    private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    public void setEncoder(BCryptPasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
 
     @Autowired
     public UserRestController(UserServiceImpl userService) {
@@ -41,7 +49,9 @@ public class UserRestController {
         BaseApiResponse<UserRest> response = new BaseApiResponse<>();
 
         UserDto userDto = commonUtils.getMapper().map(user, UserDto.class);
-        userDto.setUserId("1234-1234-1234-1232");
+        UUID uuid = UUID.randomUUID();
+        userDto.setUserId(uuid.toString());
+        userDto.setPassword(encoder.encode(userDto.getPassword()));
 
         UserDto insertedUser = userService.insert(userDto);
 

@@ -31,7 +31,6 @@ public class ArticleRestController {
         BaseApiResponse<ArticleRequestModel> response = new BaseApiResponse<>();
 
         // Validate ->
-
         ModelMapper mapper = new ModelMapper();
         ArticleDto articleDto = mapper.map(article, ArticleDto.class);
 

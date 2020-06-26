@@ -1,15 +1,24 @@
 package com.kshrd.articlerest_version2.rest.request;
 
+import com.kshrd.articlerest_version2.repository.dto.RoleDto;
+
+import java.util.List;
+
 public class UserRequestModel {
 
     private String username;
     private String password;
 
+    private List<RoleDto> roles;
+
     public UserRequestModel() {}
 
-    public UserRequestModel(String username, String password) {
+    public UserRequestModel(String username,
+                            String password,
+                            List<RoleDto> roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
     public String getUsername() {
@@ -28,4 +37,11 @@ public class UserRequestModel {
         this.password = password;
     }
 
+    public void setRoles(List<RoleDto> roles) {
+        this.roles = roles;
+    }
+
+    public List<RoleDto> getRoles() {
+        return roles;
+    }
 }

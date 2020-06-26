@@ -1,18 +1,30 @@
 package com.kshrd.articlerest_version2.repository.dto;
 
-public class UserDto {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
+public class UserDto implements UserDetails {
 
     private int id;
     private String userId;
     private String username;
     private String password;
 
+    private List<RoleDto> roles;
+
     public UserDto() {}
 
-    public UserDto(String userId, String username, String password) {
+    public UserDto(String userId,
+                   String username,
+                   String password,
+                   List<RoleDto> roles) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -35,8 +47,33 @@ public class UserDto {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
     }
 
     public String getPassword() {
@@ -47,6 +84,14 @@ public class UserDto {
         this.password = password;
     }
 
+    public void setRoles(List<RoleDto> roles) {
+        this.roles = roles;
+    }
+
+    public List<RoleDto> getRoles() {
+        return roles;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
@@ -54,7 +99,7 @@ public class UserDto {
                 ", userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
 }
