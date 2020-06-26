@@ -1,15 +1,13 @@
-package com.kshrd.articlerest_version2.repository.dto;
+package com.kshrd.articlerest_version2.rest.request;
 
-import org.springframework.security.core.GrantedAuthority;
-
-public class RoleDto implements GrantedAuthority {
+public class RoleRequestModel {
 
     private int id;
     private String name;
 
-    public RoleDto() {}
+    public RoleRequestModel() {}
 
-    public RoleDto(String name) {
+    public RoleRequestModel(String name) {
         this.name = name;
     }
 
@@ -37,8 +35,4 @@ public class RoleDto implements GrantedAuthority {
                 '}';
     }
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
 }

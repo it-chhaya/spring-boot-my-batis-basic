@@ -38,6 +38,7 @@ public class ArticleRestController {
         // Give generated ID to result
         articleDto.setArticleId("qwertyuiojbfjkldfh");
 
+
         ArticleDto result = articleService.insert(articleDto);
 
         ArticleRequestModel result2 = mapper.map(result, ArticleRequestModel.class);
